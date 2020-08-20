@@ -1,4 +1,7 @@
 FROM python:3.6
 WORKDIR /DCPDN
+COPY requirements.txt /DCPDN
 RUN pip install -r requirements.txt
+RUN pip3 --no-cache-dir install pytorch-pretrained-bert==0.6.1 torch==1.0.1.post2 seqeval==0.0.5 nltk
+COPY create_train.py /DCPDN
 CMD ["python", "create_train.py"]
