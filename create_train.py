@@ -73,8 +73,9 @@ directory='/data/facades/train'
 
 image = nyu_depth['images']
 depth = nyu_depth['depths']
+scene= nyu_depth['scenes']
 
-img_size = 224
+img_size = 400
 
 # per=np.random.permutation(1400)
 # np.save('rand_per.py',per)
@@ -82,14 +83,18 @@ img_size = 224
 total_num = 0
 plt.ion()
 
-coloured=np.array([[  0.8,         0.8,         0.8       ],
-                   [161.93557207,  96.6134324,   30.37198881],
+coloured=np.array([[161.93557207,  96.6134324,   30.37198881],
                    [219.21343269, 164.85414804, 187.38114257],
-                   [127.85954953, 145.75792237, 173.37709691],
-                   [125.54341886, 125.54341886, 125.54341886]])
+                   [ 56.20770987, 111.56293623, 172.26395369],
+                   [  4.52456349, 172.16406746, 102.12222222]])
+colour=["yellow","pink","blue","green"]
+density=["light","medium","dense"]
+
 beeta=np.array([1,3,5])
 for index in range(1000):
     index = index
+    scene_index=scene[index,0]
+    
     gt_image = (image[index, :, :, :]).astype(float)
     gt_image = np.swapaxes(gt_image, 0, 2)
 
@@ -118,32 +123,35 @@ for index in range(1000):
     if gt_depth.shape != (img_size, img_size):
         continue
 
-    for j in range(5):
+    for k in range(3):
         
-        for k in range(3):
-
-            beta = beeta[k]
-
-            tx1 = np.exp(-beta * gt_depth)
-
+        A=np.array([0.8,0.8,0.8])
+        beta = beeta[k]
+        
+        tx1 = np.exp(-beta * gt_depth)
+        
+        m = gt_image.shape[0]
+        n = gt_image.shape[1]
+        
+        rep_atmosphere = np.tile(np.reshape(A, [1, 1, 3]), [m, n, 1])
+        tx1 = np.reshape(tx1, [m, n, 1])
+        max_transmission = np.tile(tx1, [1, 1, 3])
+        uni_image = gt_image * max_transmission + rep_atmosphere * (1 - max_transmission)
+        
+        for j in range(4):
+            
             A=coloured[j];
-
-
-            m = gt_image.shape[0]
-            n = gt_image.shape[1]
-
             rep_atmosphere = np.tile(np.reshape(A, [1, 1, 3]), [m, n, 1])
-            tx1 = np.reshape(tx1, [m, n, 1])
-
-            max_transmission = np.tile(tx1, [1, 1, 3])
+            
 
             haze_image = gt_image * max_transmission + rep_atmosphere * (1 - max_transmission)
 
-            total_num = total_num + 1
+            #total_num = total_num + 1
             #scipy.misc.imsave('a0.9beta1.29.jpg', haze_image)
             #scipy.misc.imsave('gt.jpg', gt_image)
 
-            h5f=h5py.File('/data/DCPDN/facades/train/'+str(index)+'_'+str(j)+'_'+str(k)+'.h5','w')
+            h5f=h5py.File('/data/DCPDN/facades/train/scene'+str(scene_index)+'_'+str(index)+'_'+colour[j]+'_'+density[k]+'.h5','w')
             h5f.create_dataset('haze',data=haze_image)
             h5f.create_dataset('trans',data=max_transmission)
+            h5f.create_dataset('uni',data=uni_image)
             h5f.create_dataset('gt',data=gt_image)
