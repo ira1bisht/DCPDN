@@ -2,7 +2,7 @@ from __future__ import division
 import numpy as np
 import sys
 
-sys.path.append("./mingqingscript")
+#sys.path.append("./mingqingscript")
 
 import scipy.io as sio
 import scipy.ndimage.interpolation
