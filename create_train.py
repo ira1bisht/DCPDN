@@ -94,7 +94,7 @@ for index in range(1000):
     gt_image = np.swapaxes(gt_image, 0, 2)
 
     #gt_image = scipy.misc.imresize(gt_image, [img_size, img_size]).astype(float)
-    gt_image = np.array(Image.fromarray(gt_image).resize((img_size,img_size)).astype(float)
+    gt_image = np.array(Image.fromarray(gt_image).resize((img_size,img_size))).astype(float)
     
     gt_image = gt_image / 255
 
@@ -135,8 +135,8 @@ for index in range(1000):
             haze_image = gt_image * max_transmission + rep_atmosphere * (1 - max_transmission)
 
             total_num = total_num + 1
-            scipy.misc.imsave('a0.9beta1.29.jpg', haze_image)
-            scipy.misc.imsave('gt.jpg', gt_image)
+            #scipy.misc.imsave('a0.9beta1.29.jpg', haze_image)
+            #scipy.misc.imsave('gt.jpg', gt_image)
 
             h5f=h5py.File('/data/facades/train/'+str(i)+'_'+str(j)+'_'+str(k)+'.h5','w')
             h5f.create_dataset('haze',data=haze_image)
