@@ -94,7 +94,7 @@ for index in range(1000):
     gt_image = np.swapaxes(gt_image, 0, 2)
 
     #gt_image = scipy.misc.imresize(gt_image, [img_size, img_size]).astype(float)
-    img=Image.fromarray(gt_image)
+    img=Image.fromarray(gt_image.astype(np.uint8))
     print(type(gt_image))
     print(type(img))
     gt_image=img.resize(size=(img_size,img_size))
