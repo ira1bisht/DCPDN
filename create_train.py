@@ -2,7 +2,7 @@ from __future__ import division
 import numpy as np
 import sys
 
-#sys.path.append("./mingqingscript")
+sys.path.append("./mingqingscript")
 
 import scipy.io as sio
 import scipy.ndimage.interpolation
@@ -21,7 +21,7 @@ import random
 import sys
 import shutil
 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import matplotlib.patches as patches
 
@@ -64,10 +64,10 @@ def array2PIL(arr, size):
 index = 1
 nyu_depth = h5py.File('/data/nyu_depth_v2_labeled.mat', 'r')
 
-directory='facades/train'
+directory='/data/facades/train'
 
-if not os.path.exists(directory):
-    os.makedirs(directory)
+#if not os.path.exists(directory):
+#    os.makedirs(directory)
 
 
 image = nyu_depth['images']
@@ -136,7 +136,7 @@ for index in range(1000):
             scipy.misc.imsave('a0.9beta1.29.jpg', haze_image)
             scipy.misc.imsave('gt.jpg', gt_image)
 
-            h5f=h5py.File('./facades/train/'+str(i)+'_'+str(j)+'_'+str(k)+'.h5','w')
+            h5f=h5py.File('/data/facades/train/'+str(i)+'_'+str(j)+'_'+str(k)+'.h5','w')
             h5f.create_dataset('haze',data=haze_image)
             h5f.create_dataset('trans',data=max_transmission)
             h5f.create_dataset('gt',data=gt_image)
