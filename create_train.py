@@ -8,6 +8,7 @@ import scipy.io as sio
 import scipy.ndimage.interpolation
 # import scipy.signal
 import scipy.misc
+import scipy.ndimage
 import os
 
 import math
@@ -92,8 +93,9 @@ for index in range(1000):
     gt_image = (image[index, :, :, :]).astype(float)
     gt_image = np.swapaxes(gt_image, 0, 2)
 
-    gt_image = scipy.misc.imresize(gt_image, [img_size, img_size]).astype(float)
-
+    #gt_image = scipy.misc.imresize(gt_image, [img_size, img_size]).astype(float)
+    gt_image = np.array(Image.fromarray(gt_image).resize((img_size,img_size)).astype(float)
+    
     gt_image = gt_image / 255
 
 
