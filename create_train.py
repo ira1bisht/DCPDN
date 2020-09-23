@@ -62,7 +62,7 @@ def array2PIL(arr, size):
 
 
 index = 1
-nyu_depth = h5py.File('nyu_depth_v2_labeled.mat', 'r')
+nyu_depth = h5py.File('/data/nyu_depth_v2_labeled.mat', 'r')
 
 directory='facades/train'
 
