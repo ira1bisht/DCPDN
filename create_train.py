@@ -7,7 +7,7 @@ import sys
 import scipy.io as sio
 import scipy.ndimage.interpolation
 # import scipy.signal
-
+import scipy.misc
 import os
 
 import math
