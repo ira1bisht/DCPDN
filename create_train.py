@@ -94,7 +94,12 @@ for index in range(1000):
     gt_image = np.swapaxes(gt_image, 0, 2)
 
     #gt_image = scipy.misc.imresize(gt_image, [img_size, img_size]).astype(float)
-    gt_image = np.array(Image.fromarray(gt_image).resize((img_size,img_size))).astype(float)
+    img=Image.fromarray(gt_image)
+    print(type(gt_image))
+    print(type(img))
+    gt_image=img.resize(size=(img_size,img_size))
+    gt_image=np.array(gt_image).astype(float)
+    #gt_image = np.array(Image.fromarray(gt_image).resize((img_size,img_size))).astype(float)
     
     gt_image = gt_image / 255
 
