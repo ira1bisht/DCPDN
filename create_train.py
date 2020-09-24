@@ -93,7 +93,7 @@ density=["light","medium","dense"]
 beeta=np.array([1,3,5])
 for index in range(1000):
     index = index
-    scene_index=scene[index,0]
+    scene_index=scene[0,index]
     
     gt_image = (image[index, :, :, :]).astype(float)
     gt_image = np.swapaxes(gt_image, 0, 2)
