@@ -93,7 +93,7 @@ scene_map=dict()
 current_scene_num=0
 
 beeta=np.array([1,3,5])
-for index in range(5):
+for index in range(1000):
     index = index
     scene_string=scene[0,index]
     scene_num=0;
