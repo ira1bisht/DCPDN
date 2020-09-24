@@ -105,7 +105,7 @@ for index in range(5):
         scene_map[scene_string]=current_scene_num
         scene_num=current_scene_num
         
-    print(scene_num, scene_string)   
+    #print(scene_num, scene_string)   
     gt_image = (image[index, :, :, :]).astype(float)
     gt_image = np.swapaxes(gt_image, 0, 2)
 
@@ -161,7 +161,8 @@ for index in range(5):
             #scipy.misc.imsave('a0.9beta1.29.jpg', haze_image)
             #scipy.misc.imsave('gt.jpg', gt_image)
 
-            h5f=h5py.File('/data/DCPDN/facades/data/scene'+str(scene_num)+'_'+str(index)+'_'+colour[j]+'_'+density[k]+'.h5','w')
+            #h5f=h5py.File('/data/DCPDN/facades/data/scene'+str(scene_num)+'_'+str(index)+'_'+colour[j]+'_'+density[k]+'.h5','w')
+            h5f=h5py.File('/data/DCPDN/facades/dataset/'+str(index)+'_'+colour[j]+'_'+density[k]+'.h5','w')
             h5f.create_dataset('haze',data=haze_image)
             h5f.create_dataset('trans',data=max_transmission)
             h5f.create_dataset('uni',data=uni_image)
