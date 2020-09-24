@@ -161,8 +161,8 @@ for index in range(1000):
             #scipy.misc.imsave('a0.9beta1.29.jpg', haze_image)
             #scipy.misc.imsave('gt.jpg', gt_image)
 
-            #h5f=h5py.File('/data/DCPDN/facades/data/scene'+str(scene_num)+'_'+str(index)+'_'+colour[j]+'_'+density[k]+'.h5','w')
-            h5f=h5py.File('/data/DCPDN/facades/dataset/'+str(index)+'_'+colour[j]+'_'+density[k]+'.h5','w')
+            h5f=h5py.File('/data/DCPDN/facades/data/scene'+str(scene_num)+'_'+str(index)+'_'+colour[j]+'_'+density[k]+'.h5','w')
+            #h5f=h5py.File('/data/DCPDN/facades/dataset/'+str(index)+'_'+colour[j]+'_'+density[k]+'.h5','w')
             h5f.create_dataset('haze',data=haze_image)
             h5f.create_dataset('trans',data=max_transmission)
             h5f.create_dataset('uni',data=uni_image)
