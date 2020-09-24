@@ -89,12 +89,22 @@ coloured=np.array([[161.93557207,  96.6134324,   30.37198881],
                    [  4.52456349, 172.16406746, 102.12222222]])
 colour=["yellow","pink","blue","green"]
 density=["light","medium","dense"]
+scene_map=dict()
+current_scene_num=0
 
 beeta=np.array([1,3,5])
 for index in range(1000):
     index = index
-    scene_index=scene[0,index]
+    scene_string=scene[0,index]
+    scene_num=0;
     
+    if scene_string in scene_map:
+        scene_num=scene_map[scene_string]
+    else:
+        current_scene_num+=1
+        scene_map[scene_string]=current_scene_num
+        scene_num=current_scene_num
+        
     gt_image = (image[index, :, :, :]).astype(float)
     gt_image = np.swapaxes(gt_image, 0, 2)
 
@@ -150,7 +160,7 @@ for index in range(1000):
             #scipy.misc.imsave('a0.9beta1.29.jpg', haze_image)
             #scipy.misc.imsave('gt.jpg', gt_image)
 
-            h5f=h5py.File('/data/DCPDN/facades/train/scene'+str(scene_index)+'_'+str(index)+'_'+colour[j]+'_'+density[k]+'.h5','w')
+            h5f=h5py.File('/data/DCPDN/facades/data/scene'+str(scene_num)+'_'+str(index)+'_'+colour[j]+'_'+density[k]+'.h5','w')
             h5f.create_dataset('haze',data=haze_image)
             h5f.create_dataset('trans',data=max_transmission)
             h5f.create_dataset('uni',data=uni_image)
