@@ -93,8 +93,8 @@ density=["light","medium","dense"]
 #scene_map=dict()
 current_scene_num=0
 
-beeta=np.array([1,3,5])
-for index in range(2):
+beeta=np.array([1,2.5,5])
+for index in range(1000):
     index = index
     #scene_string=scene[0,index]
     #scene_num=0;
@@ -135,7 +135,7 @@ for index in range(2):
     if gt_depth.shape != (img_size, img_size):
         continue
 
-    for k in range(3):
+    for k in range(2):
         
         A=np.array([0.8,0.8,0.8])
         beta = beeta[k]
