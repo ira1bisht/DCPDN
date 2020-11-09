@@ -73,7 +73,7 @@ directory='/data/facades/train'
 
 image = nyu_depth['images']
 depth = nyu_depth['depths']
-scene= nyu_depth['scenes']
+#scene= nyu_depth['scenes']
 
 img_size = 400
 
@@ -90,21 +90,21 @@ coloured=np.array([[161.93557207,  96.6134324,   30.37198881],
 coloured/=255;
 colour=["yellow","pink","blue","green"]
 density=["light","medium","dense"]
-scene_map=dict()
+#scene_map=dict()
 current_scene_num=0
 
 beeta=np.array([1,3,5])
-for index in range(1000):
+for index in range(2):
     index = index
-    scene_string=scene[0,index]
-    scene_num=0;
+    #scene_string=scene[0,index]
+    #scene_num=0;
     
-    if scene_string in scene_map:
-        scene_num=scene_map[scene_string]
-    else:
-        current_scene_num+=1
-        scene_map[scene_string]=current_scene_num
-        scene_num=current_scene_num
+    #if scene_string in scene_map:
+    #    scene_num=scene_map[scene_string]
+    #else:
+    #    current_scene_num+=1
+    #    scene_map[scene_string]=current_scene_num
+    #    scene_num=current_scene_num
         
     #print(scene_num, scene_string)   
     gt_image = (image[index, :, :, :]).astype(float)
@@ -162,8 +162,8 @@ for index in range(1000):
             #scipy.misc.imsave('a0.9beta1.29.jpg', haze_image)
             #scipy.misc.imsave('gt.jpg', gt_image)
 
-            h5f=h5py.File('/data/DCPDN/facades/data/scene'+str(scene_num)+'_'+str(index)+'_'+colour[j]+'_'+density[k]+'.h5','w')
-            #h5f=h5py.File('/data/DCPDN/facades/dataset/'+str(index)+'_'+colour[j]+'_'+density[k]+'.h5','w')
+            #h5f=h5py.File('/data/DCPDN/facades/data/scene'+str(scene_num)+'_'+str(index)+'_'+colour[j]+'_'+density[k]+'.h5','w')
+            h5f=h5py.File('/data/DCPDN/facades/new-data/'+str(index)+'_'+colour[j]+'_'+density[k]+'.h5','w')
             h5f.create_dataset('haze',data=haze_image)
             h5f.create_dataset('trans',data=max_transmission)
             h5f.create_dataset('uni',data=uni_image)
